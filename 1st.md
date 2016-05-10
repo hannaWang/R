@@ -310,7 +310,7 @@ write.table(test.data, file = "test.txt" , sep = " ") #寫入table
 write.csv(test.data, file = "test.csv") #寫入csv
 ```
 
-###p68 example
+####p68 example
 ```{R}
 tw2330 = read.csv("Class/data/2330.csv", header = TRUE)
 stock = tw2330[(tw2330$Date >= '2015-03-01' & tw2330$Date < '2015-08-31'),]  #用條件篩選做資料選取,[參數1:選列,參數2:選行]
@@ -410,7 +410,7 @@ while(cnt <= 100){
 sum
 ```
 
-###page81 example
+####page81 example
 ```{R}
 nine_nine = function(){
   mat = matrix(rep(1,9^2),nrow = 9)
@@ -460,7 +460,7 @@ f4 = function(a,b){
 }
 ```
 
-###p84  example
+####p84  example
 ```{R}
 match_func = function(filename= "data/match.txt"){
   mat = matrix(-1, nrow=5, ncol = 5)
@@ -475,7 +475,7 @@ match_func = function(filename= "data/match.txt"){
 }
 match_func("Class/data/match.txt")
 
-###p84-2
+####p84-2
 match_func = function(filename){  #filename is parameter
   t = read.table(filename,sep = '|');
   c = 0;
