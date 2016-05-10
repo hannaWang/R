@@ -132,7 +132,7 @@ height_vec > 175 | height_vec < 170
 height_vec < 175 & height_vec > 170
 
 ```
-##p42 example
+###p42 example
 ```{R, echo=TRUE}
 h = c(180,169,173)
 w = c(73,87,43)
@@ -211,7 +211,7 @@ m1 %*% m2
 
 ```
 
-##p53 example
+###p53 example
 ```{R}
 kevin = c(85,73)
 marry = c(72,64)
@@ -320,7 +320,7 @@ write.csv(test.data, file = "test.csv") #寫入csv
 
 ```
 
-##p68 example
+###p68 example
 ```{R}
 tw2330 = read.csv("table.csv", header=TRUE)
 str(tw2330)
@@ -424,7 +424,7 @@ while(cnt <= 100){
 sum
 ```
 
-#page80
+###page80
 ```{R}
 nine_nine = function(){
   mat = matrix(rep(1,9^2),nrow = 9)
@@ -472,7 +472,7 @@ f4 = function(a,b){
 }
 ```
 
-#p84
+###p84
 ```{R}
 match_func = function(filename= "data/match.txt"){
   mat = matrix(-1, nrow=5, ncol = 5)
@@ -486,7 +486,7 @@ match_func = function(filename= "data/match.txt"){
   mat
 }
 
-#p84-2
+###p84-2
 match_func = function(filename){
   t = read.table(filename,sep = '|');
   c = 0;
