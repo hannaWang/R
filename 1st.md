@@ -221,8 +221,9 @@ temperature_category[4] > temperature_category[3]
 
 # change levels name
 weather= c("s","r", "c", "r", "c")
+levels(weather)    #(c,r,s)
 weather_factor = factor(weather)
-levels(weather_factor) = c("cloudy","rainy","sunny")
+levels(weather_factor) = c("cloudy","rainy","sunny")  #與levels(weather)位置對應並替換
 weather_factor
 ```
 
@@ -286,7 +287,7 @@ plot(x=iris$Petal.Length, y=iris$Petal.Width, col=iris$Species)
 ##File read and write
 ```{R}
 getwd()
-setwd("C:/Users/BigData/Desktop")
+setwd("C:/Users/BigData/Desktop")    #更換預設路徑
 tw2330 = read.csv("table.csv", header=TRUE)
 
 test.data = read.table("match.txt" ,header = TRUE, sep="|")
