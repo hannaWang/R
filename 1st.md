@@ -147,19 +147,20 @@ bmi < 18.5 | bmi >= 24
 seq(1,20)
 seq(1,20,2)
 seq(1,20,by=2)
-seq(1,20,length=2)
+seq(1,20,length=4)  #切成4等分
 
-rep(1,5)
+rep(1,5)  #rep(值,次數)
 rep(c(1,2), times=5)
-rep(c(1,2), times=c(1,2))
+rep(c(1,2), times=c(1,2)) #times=c(1,2):c(1, )一次,c( ,2)二次
 rep(c(1,2), each=5)
-rep_len(c(1,2),5)
+rep_len(c(1,2),5) #rep c(1,2),長度為5
 
+#paste converts its arguments (via as.character ) to character strings, and concatenates them
 paste("the","big","bang","theory")
 paste("big","bang",sep="")
 paste("big","bang",sep=";")
-paste(c("big","bang"),1:4)
-paste(c("big","bang"),1:4,,collapse = "+" )
+paste(c("big","bang"),1:4)  # "big 1"  "bang 2" "big 3"  "bang 4"
+paste(c("big","bang"),1:4,collapse = "+" )
 ```
 
 ##Matrix
@@ -299,15 +300,6 @@ hist(iris$Sepal.Length)    #長條圖
 boxplot(Petal.Width ~ Species, data = iris)
 plot(x=iris$Petal.Length, y=iris$Petal.Width, col=iris$Species)
 
-#找出最高收盤價
-tw2330 = read.csv("Class/data/2330.csv", header = TRUE)
-stock = tw2330[(tw2330$Date < "2015-05-14" & tw2330$Date > "2015-05-01"),]  #用條件篩選做資料選取,[參數1:選列,參數2:選行]
-str(tw2330$Date)  #檢視變數型態
-tw2330$Date = as.Date(tw2330$Date)  #變數轉型(factor->date):as.Date
-str(tw2330)
-max(stock$Close)
-
-```
 ##File read and write
 ```{R}
 getwd()    #取得目前工作區
@@ -322,19 +314,18 @@ write.csv(test.data, file = "test.csv") #寫入csv
 
 ###p68 example
 ```{R}
-tw2330 = read.csv("table.csv", header=TRUE)
-str(tw2330)
-tw2330$Date = as.Date(tw2330$Date)
-max(tw2330$Close)
-stock2 = tw2330[(tw2330$Date >= '2015-03-01' & tw2330$Date < '2015-08-31'),]
+tw2330 = read.csv("Class/data/2330.csv", header = TRUE)
+stock = tw2330[(tw2330$Date >= '2015-03-01' & tw2330$Date < '2015-08-31'),]  #用條件篩選做資料選取,[參數1:選列,參數2:選行]
+str(tw2330) #檢視變數型態
+tw2330$Date = as.Date(tw2330$Date)  #變數轉型(factor->date):as.Date
 max(tw2330$Close)
 
-summary(stock2$Close)
-hist(stock2$Close)
-boxplot(stock2$Close)
-plot(stock2$Date, stock2$Close)
+summary(stock$Close)
+hist(stock$Close) #Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+boxplot(stock$Close)
+plot(stock$Date, stock$Close)
 
-ordered_stock = stock2[order(stock2$Close, decreasing = T),]
+ordered_stock = stock[order(stock$Close, decreasing = T),]
 ordered_stock[1,]
 ordered_stock[nrow(ordered_stock),]
 ordered_stock[1,"Close"] - ordered_stock[nrow(ordered_stock),"Close"]
@@ -424,7 +415,7 @@ while(cnt <= 100){
 sum
 ```
 
-###page80
+###page81 example
 ```{R}
 nine_nine = function(){
   mat = matrix(rep(1,9^2),nrow = 9)
@@ -435,6 +426,7 @@ nine_nine = function(){
   }
   mat
 }
+nine_nine()  #欲印出矩陣需執行函數
 
 nine_nine2 = function(){
   mat1 = matrix(1:9, nrow = 9);
@@ -442,6 +434,7 @@ nine_nine2 = function(){
   mat = mat1 %*% mat2;
   mat
 }
+nine_nine2()  #欲印出矩陣需執行函數
 ```
 
 ##Function
@@ -472,7 +465,7 @@ f4 = function(a,b){
 }
 ```
 
-###p84
+###p84  example
 ```{R}
 match_func = function(filename= "data/match.txt"){
   mat = matrix(-1, nrow=5, ncol = 5)
@@ -480,14 +473,15 @@ match_func = function(filename= "data/match.txt"){
   colnames(mat) = c("A","B","C","D","E")
   
   match = read.table(filename, sep= "|")
-  for (i in 1:nrow(match)){
+  for (i in 1:nrow(match)){ #nrow():The Number of Rows/Columns of an Array
     mat[match[i,1], match[i,2]] = match[i,3];
   }
   mat
 }
+match_func("Class/data/match.txt")
 
 ###p84-2
-match_func = function(filename){
+match_func = function(filename){  #filename is parameter
   t = read.table(filename,sep = '|');
   c = 0;
   mat = matrix(rep(-1,length(levels(t[,1]))^2), nrow = length(levels(t[,1])), dimnames = list(levels(t[,1]),levels(t[,2])));
@@ -502,6 +496,7 @@ match_func = function(filename){
   }
   mat
 }
+match_func("Class/data/match.txt")
 ```
 
 ##lapply sapply apply tapply
