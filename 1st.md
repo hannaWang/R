@@ -28,11 +28,10 @@ setMethod(f='show',"BMI",function(obj){
           }
 )
 john <- new("BMI",name="JOHN",weight=70,height=182)
-
 ```
 
 
-## RDemo
+## R Demo
 ```{r RDemo, echo=TRUE}
 install.packages("car")
 library("car")
@@ -130,8 +129,8 @@ height_vec > 175
 height_vec / 100
 height_vec > 175 | height_vec < 170
 height_vec < 175 & height_vec > 170
-
 ```
+
 ###p42 example
 ```{R, echo=TRUE}
 h = c(180,169,173)
@@ -197,7 +196,6 @@ mat3
 
 rowMeans(mat3)
 colMeans(mat3)
-
 
 # arithmetic
 m1 = matrix(1:4, byrow=TRUE, nrow=2)
@@ -299,6 +297,7 @@ pie(table.iris)
 hist(iris$Sepal.Length)    #長條圖
 boxplot(Petal.Width ~ Species, data = iris)
 plot(x=iris$Petal.Length, y=iris$Petal.Width, col=iris$Species)
+```
 
 ##File read and write
 ```{R}
@@ -309,7 +308,6 @@ test.data = read.table("match.txt" ,header = TRUE, sep="|") #header = TRUE:表�
 
 write.table(test.data, file = "test.txt" , sep = " ") #寫入table
 write.csv(test.data, file = "test.csv") #寫入csv
-
 ```
 
 ###p68 example
@@ -329,7 +327,6 @@ ordered_stock = stock[order(stock$Close, decreasing = T),]
 ordered_stock[1,]
 ordered_stock[nrow(ordered_stock),]
 ordered_stock[1,"Close"] - ordered_stock[nrow(ordered_stock),"Close"]
-
 ```
 
 ##List
@@ -357,7 +354,6 @@ if(x>3){
   print
   ("x <= 3");
 }
-
 
 x=5;
 if(x>3){
@@ -398,7 +394,6 @@ for(i in 1:100){
   ary[i]= i;
 }
 ary
-
 
 ary2 =c()
 for(i in 1:100){
@@ -518,8 +513,7 @@ m2 = matrix(5:8, byrow=TRUE, nrow=2)
 li = list(m1, m2)
 lapply(li, mean)
 
-
-class(lapply(grades, sum))
+class(lapply(grades, sum))  # "list"
 sapply(grades, sum)
 
 m1 = matrix(1:4, byrow=TRUE, nrow=2)
