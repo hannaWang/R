@@ -131,7 +131,7 @@ height_vec > 175 | height_vec < 170
 height_vec < 175 & height_vec > 170
 ```
 
-###p42 example
+####p42 example
 ```{R, echo=TRUE}
 h = c(180,169,173)
 w = c(73,87,43)
@@ -210,7 +210,7 @@ m1 %*% m2
 
 ```
 
-###p53 example
+####p53 example
 ```{R}
 kevin = c(85,73)
 marry = c(72,64)
