@@ -234,41 +234,42 @@ df
 class(df)
 str(df)
 
-data(iris)head(iris, 10)
+data(iris)
+head(iris, 10)
 head(iris)
 tail(iris, 10)
 tail(iris)
-str(iris)
+str(iris)    #檢視資料架構
 
 iris[1:3,]
 iris[1:3,1]
-iris[1:3,"Sepal.Length"]
+iris[1:3,"Sepal.Length"]  #Sepal.Length為columnname(變數名)
 head(iris[,1:2])
-iris$"Sepal.Length"
+iris$"Sepal.Length" #列出變數:Sepal.Length的所有值
 
 #取前五筆包含length 及 width 的資料
 Five.Sepal.iris = iris[1:5, c("Sepal.Length","Sepal.Width")]
 #可以用條件做篩選
-setosa.data = iris[iris$Species=="setosa",1:5]
-str(setosa.data)
+setosa.data = iris[iris$Species=="setosa",1:5]  #選取變數Species,值為setosa
+str(setosa.data)   #檢視資料架構
 
-#使用which 做資料篩選
-which(iris$Species=="setosa")
+#使用which 做資料篩選(僅列出標題列)
+which(iris$Species=="setosa") 
 
 #attach() detach()
+#注意attach只是目前資料集的快照(snapshot),若原始資料有更動,attach中的資料不會跟著變動
 attach(iris)
 Species
 setosa.data = iris[Species=="setosa",1:5]
-###注意attach只是目前資料集的快照(snapshot),若原始資料有更動,attach中的資料不會跟著變動
 iris[1,1]
-iris[1,1] = 5.5
+iris[1,1] = 5.5 #更換dataframe裡面的資料值
 iris
-Sepal.Length[1]
+Sepal.Length[1] #快照(snapshot),原始資料更動attach中的資料卻不動
 detach()
 
 #merge進行資料合併
-flower.type = data.frame(Species = "setosa", Flower = "iris")
-merge(flower.type, iris[1:3,], by ="Species")
+flower.type = data.frame(Species = "setosa", Flower = "iris")    #建立dataframe, 並給變數與變數值
+merge(flower.type, iris[1:3,], by ="Species")    #使用兩表都有的變數:Species合併
 
 #用order做資料排序
 iris[order(iris$Sepal.Length, decreasing = TRUE),]
@@ -276,23 +277,27 @@ iris[order(iris$Sepal.Length, decreasing = TRUE),]
 #繪圖
 table.iris = table(iris$Species)
 pie(table.iris)
-hist(iris$Sepal.Length)
-
+hist(iris$Sepal.Length)    #長條圖
 boxplot(Petal.Width ~ Species, data = iris)
 plot(x=iris$Petal.Length, y=iris$Petal.Width, col=iris$Species)
 
-
+#找出最高收盤價
+tw2330 = read.csv("Class/data/2330.csv", header = TRUE)
+stock = tw2330[(tw2330$Date < "2015-05-14" & tw2330$Date > "2015-05-01"),]  #用條件篩選做資料選取,[參數1:選列,參數2:選行]
+str(tw2330$Date)  #檢視變數型態
+tw2330$Date = as.Date(tw2330$Date)  #變數轉型(factor->date):as.Date
+str(tw2330)
+max(stock$Close)
 
 ```
 ##File read and write
 ```{R}
-getwd()
+getwd()    #取得目前工作區
 setwd("C:/Users/BigData/Desktop")    #更換預設路徑
-tw2330 = read.csv("table.csv", header=TRUE)
+tw2330 = read.csv("table.csv", header=TRUE)    #讀取檔案
+test.data = read.table("match.txt" ,header = TRUE, sep="|") #header = TRUE:表頭為變數名稱
 
-test.data = read.table("match.txt" ,header = TRUE, sep="|")
-
-#table
+#寫入table
 write.table(test.data, file = "test.txt" , sep = " ")
 #csv
 write.csv(test.data, file = "test.csv")
@@ -312,4 +317,146 @@ flower= list(title="iris dataset", data= iris)
 class(flower)
 class(flower$data)
 flower$data[1,"Sepal.Width"]
+```
+
+##Flow Contorl
+```{R}
+x=5;
+if(x>3){
+  print
+  ("x > 3");
+}else{
+  print
+  ("x <= 3");
+}
+
+
+x=5;
+if(x>3){
+  print ("x > 3");
+} else if (x ==3){
+  print ("x == 3");
+}else{
+  print
+  ("x <= 3");
+}
+
+x=5;
+if(x>5){
+  print ("aaa");
+} else if (x <= 5 & x > 3 ){
+  print ("bbb");
+}else{
+  print
+  ("ccc");
+}
+
+
+for(i in 1:10){
+  print(i);
+}
+
+sum=0
+for(i in 1:100){
+  sum= sum+ i;
+}
+sum
+
+sum(1:100)
+
+
+ary = rep(NA, 100)
+for(i in 1:100){
+  ary[i]= i;
+}
+ary
+
+
+ary2 =c()
+for(i in 1:100){
+  ary2 = c(ary2, i);
+}
+ary2
+
+sum = 0;
+cnt = 0;
+while(cnt <= 100){
+  sum = sum + cnt;
+  cnt = cnt + 1;
+}
+sum
+```
+
+##Function
+```{R}
+f = function(a){
+    print(a+3)
+}
+
+f1 = function(a = 3) {
+    print(a+3)
+}
+
+f2 = function(a, b = 2, c = NULL) {
+   a + b
+}
+
+b = 3
+f3 = function(a) {
+    b = 2
+    b
+}
+
+f4 = function(a,b){
+    if(a > 3){
+       a = 100;
+    }
+    a + b;
+}
+```
+##lapply sapply apply tapply
+```{R}
+grades =list(kevin = c(80,60,92), marry = c(56,75,64,84,56), QOO = c(10,20,3,4,10))
+
+unlist(grades[1])
+for (i in 1:length(grades)){
+      print(sum(unlist(grades[i])));
+}
+
+lapply(grades, sum)
+lapply(grades, mean)
+lapply(grades, function(e){list(sum = sum(e), min = min(e))})
+
+lapply(c(1,2,3,4,5),  function(e){paste(as.character(e), "hello")})
+m1 = matrix(1:4, byrow=TRUE, nrow=2)
+m2 = matrix(5:8, byrow=TRUE, nrow=2)
+
+li = list(m1, m2)
+lapply(li, mean)
+
+
+class(lapply(grades, sum))
+sapply(grades, sum)
+
+m1 = matrix(1:4, byrow=TRUE, nrow=2)
+m2 = matrix(5:8, byrow=TRUE, nrow=2)
+li = list(m1, m2)
+sapply(li, mean)
+sapply(li,function(e) e[1,])
+
+m = matrix(1:4, byrow=TRUE, nrow=2)
+apply(m, 1, sum) # rowsums
+apply(m, 2, sum) # colsums
+
+rowmeans = apply(m, 1, mean)
+colmeans = apply(m, 2, mean)
+
+x = c(80,70,59,88,72,57)
+t = c(1,1,2,1,1,2)
+tapply(x,t, mean)
+
+data(iris)
+
+tapply(iris$Sepal.Length, iris$Species,mean)
+
 ```
