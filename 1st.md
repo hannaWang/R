@@ -221,9 +221,9 @@ temperature_category[4] > temperature_category[3]
 
 # change levels name
 weather= c("s","r", "c", "r", "c")
-levels(weather)    #(c,r,s)
-weather_factor = factor(weather)
-levels(weather_factor) = c("cloudy","rainy","sunny")  #與levels(weather)位置對應並替換
+weather_factor = factor(weather)    #向量轉換為類別才能提取level
+levels(weather_factor)    #(c,r,s))
+levels(weather_factor) = c("cloudy","rainy","sunny")  #與levels(weather_factor)位置對應並替換
 weather_factor
 ```
 
