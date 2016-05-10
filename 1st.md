@@ -410,7 +410,7 @@ while(cnt <= 100){
 sum
 ```
 
-####page81 example
+####p81 example
 ```{R}
 nine_nine = function(){
   mat = matrix(rep(1,9^2),nrow = 9)
