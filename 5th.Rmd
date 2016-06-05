@@ -250,6 +250,7 @@ plot(data$Sepal.Length, data$Sepal.Width,col=class)
 ```
 
 ##density-based method-DBSCAN
+- http://123android.blogspot.tw/2012/01/28dec11-data-mining.html
 ```{R}
 install.packages("mlbench")
 # mlbench package provides many methods to generate simulated data with different shapes and sizes.
