@@ -42,23 +42,30 @@ john
 
 ## R Demo
 ```{r Demo, echo=TRUE}
-install.packages("car")
-library("car")
-data(Quartet)
+install.packages("car") #安裝套件 https://stat.ethz.ch/R-manual/R-devel/library/utils/html/install.packages.html
+library("car") #引用套件car:Companion to Applied Regression
+data(Quartet) #使用資料:Quartet
+Quartet
+#    x    y1   y2    y3 x4    y4
+#1  10  8.04 9.14  7.46  8  6.58
+#2   8  6.95 8.14  6.77  8  5.76
+#3  13  7.58 8.74 12.74  8  7.71...
 
-plot(Quartet$x, Quartet$y1)
-fit = lm(Quartet$y1 ~ Quartet$x)
-abline(fit, col="red")
+plot(Quartet$x, Quartet$y1) #作散布圖
+fit = lm(Quartet$y1 ~ Quartet$x) #線性最佳配適
+abline(fit, col="red") #依函數:fit畫線
 ```
 
 
 ##R basic command
 ```{R}
 #文件查詢
+?help
 help(package="base")
 ?base:sum
-?sum
-help.search("sum")
+?sum 
+help.search("sum") #關鍵字搜尋
+#Ctr+L:清除console
 
 demo()
 data()
@@ -77,10 +84,17 @@ str()
 3/8
 1/0
 11%%2
+#[1] 11
+#[1] -5
+#[1] 24
+#[1] 0.375
+#[1] Inf
+#[1] 1
 ```
 
 ##Assignment
 ```{R}
+# "="與"<-"同義
 a = 3
 a <- 5
 fit = lm(y1 ~ x, data =Quartet)
@@ -125,16 +139,23 @@ x + c(1,2,1,2)
 
 x = c(1,2,3,4,NA)
 sum(x)
-sum(x, na.rm=T)
+sum(x, na.rm=T) #na.rm=T:NA.remove=True
+#[1] NA
+#[1] 10
 
 height_vec = c(180,169,173)
 height_vec
+#[1] 180 169 173
 names(height_vec) = c("Brian", "Toby", "Sherry")
 height_vec
+#Brian   Toby Sherry 
+#  180    169    173
 
 name_vec = c("Brian", "Toby", "Sherry")
 names(height_vec) = name_vec
 height_vec > 175
+#Brian   Toby Sherry 
+# TRUE  FALSE  FALSE
 height_vec / 100
 height_vec > 175 | height_vec < 170
 height_vec < 175 & height_vec > 170
@@ -147,6 +168,8 @@ w = c(73,87,43)
 bmi = w / ((h/100)^2)
 names(bmi) = c("Brian", "Toby", "Sherry")
 bmi < 18.5 | bmi >= 24
+#Brian   Toby Sherry 
+#FALSE   TRUE   TRUE
 ```
 
 ##seq() & rep() & paste()
@@ -156,19 +179,34 @@ seq(1,20)
 seq(1,20,2)
 seq(1,20,by=2)
 seq(1,20,length=4)  #切成4等分
+#[1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+#[1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+#[1]  1  3  5  7  9 11 13 15 17 19
+#[1]  1  3  5  7  9 11 13 15 17 19
+#[1]  1.000000  7.333333 13.666667 20.000000
 
 rep(1,5)  #rep(值,次數)
 rep(c(1,2), times=5)
 rep(c(1,2), times=c(1,2)) #times=c(1,2):c(1, )一次,c( ,2)二次
 rep(c(1,2), each=5)
 rep_len(c(1,2),5) #rep c(1,2),長度為5
+#[1] 1 1 1 1 1
+#[1] 1 2 1 2 1 2 1 2 1 2
+#[1] 1 2 2
+#[1] 1 1 1 1 1 2 2 2 2 2
+#[1] 1 2 1 2 1
 
 #paste converts its arguments (via as.character ) to character strings, and concatenates them
 paste("the","big","bang","theory")
 paste("big","bang",sep="")
 paste("big","bang",sep=";")
-paste(c("big","bang"),1:4)  # "big 1"  "bang 2" "big 3"  "bang 4"
+paste(c("big","bang"),1:4)
 paste(c("big","bang"),1:4,collapse = "+" )
+#[1] "the big bang theory"
+#[1] "bigbang"
+#[1] "big;bang"
+#[1] "big 1"  "bang 2" "big 3"  "bang 4"
+#[1] "big 1+bang 2+big 3+bang 4"
 ```
 
 ##Matrix
