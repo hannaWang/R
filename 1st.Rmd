@@ -7,6 +7,11 @@ mean(x)
 var(x)
 sqrt(var(x))
 sd(x)
+#[1] 15
+#[1] 3
+#[1] 2.5
+#[1] 1.581139
+#[1] 1.581139
 ```
 Object Oriented Language
 - http://rightthewaygeek.blogspot.tw/2013/10/r-oop1-class.html
@@ -21,18 +26,22 @@ setClass("BMI",
     height = "numeric"
   )         
 )
-setMethod(f='show',"BMI",function(obj){
-            BMI <-obj@weight/((obj@height/100)^2)
-            cat(obj@name,"\n")
+setMethod(f='show',"BMI",function(object){
+            BMI <-object@weight/((object@height/100)^2)
+            cat(object@name,"\n")
             cat("BMI= ",BMI)
           }
 )
+#[1] "show"
 john <- new("BMI",name="JOHN",weight=70,height=182)
+john
+#JOHN 
+#BMI=  21.13271
 ```
 
 
 ## R Demo
-```{r RDemo, echo=TRUE}
+```{r Demo, echo=TRUE}
 install.packages("car")
 library("car")
 data(Quartet)
